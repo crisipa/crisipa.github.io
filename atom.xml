@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>crisypa 的小本子</title>
+  
+  <subtitle>null</subtitle>
+  <link href="http://crisypa.github.io/atom.xml" rel="self"/>
+  
+  <link href="http://crisypa.github.io/"/>
+  <updated>2023-09-29T11:13:06.875Z</updated>
+  <id>http://crisypa.github.io/</id>
+  
+  <author>
+    <name>crisypa</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hello World!</title>
+    <link href="http://crisypa.github.io/2023/09/29/hello-world/"/>
+    <id>http://crisypa.github.io/2023/09/29/hello-world/</id>
+    <published>2023-09-29T05:53:33.825Z</published>
+    <updated>2023-09-29T11:13:06.875Z</updated>
+    
+    <content type="html"><![CDATA[<p>用 hexo 造的博客。<br>使用了 <a href="https://github.com/D-Sketon">D-Sketon</a> 大佬的 <a href="https://github.com/D-Sketon/hexo-theme-reimu" title="一款博丽灵梦风格的Hexo主题">hexo-theme-reimu</a> 主题。</p>]]></content>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;用 hexo 造的博客。&lt;br&gt;使用了 &lt;a href=&quot;https://github.com/D-Sketon&quot;&gt;D-Sketon&lt;/a&gt; 大佬的 &lt;a href=&quot;https://github.com/D-Sketon/hexo-theme-reimu&quot;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+</feed>
