@@ -3,11 +3,11 @@
   <title>crisypa 的小本子</title>
   
   <subtitle>null</subtitle>
-  <link href="https://crisypa.github.io/atom.xml" rel="self"/>
+  <link href="https://blog.crisipa.icu/atom.xml" rel="self"/>
   
-  <link href="https://crisypa.github.io/"/>
+  <link href="https://blog.crisipa.icu/"/>
   <updated>2023-09-29T11:13:06.875Z</updated>
-  <id>https://crisypa.github.io/</id>
+  <id>https://blog.crisipa.icu/</id>
   
   <author>
     <name>crisypa</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Hello World!</title>
-    <link href="https://crisypa.github.io/2023/09/29/hello-world/"/>
-    <id>https://crisypa.github.io/2023/09/29/hello-world/</id>
+    <link href="https://blog.crisipa.icu/2023/09/29/hello-world/"/>
+    <id>https://blog.crisipa.icu/2023/09/29/hello-world/</id>
     <published>2023-09-29T05:53:33.825Z</published>
     <updated>2023-09-29T11:13:06.875Z</updated>
     
