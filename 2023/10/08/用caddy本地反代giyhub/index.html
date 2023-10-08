@@ -1,0 +1,548 @@
+
+    <!DOCTYPE html>
+    <html lang="zh-CN"
+            
+          
+    >
+    <head>
+    <meta charset="utf-8">
+    
+
+    
+
+    
+    <title>
+        用caddy本地反代giyhub |
+        
+        crisypa 的小本子</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CUbuntu%20Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+    
+<link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free/css/v4-font-face.min.css">
+
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+    <meta name="description" content="前言github的网络问题已经是老生常谈的了。 准备工具下载caddycaddy 是一个开源的跨平台服务器软件，旨在提供简单易用的配置和自动化的 HTTPS 功能。比起nginx，caddy的配置文件相当简洁 官网：https:&#x2F;&#x2F;caddyserver.com&#x2F;下载链接：https:&#x2F;&#x2F;github.com&#x2F;caddyserver&#x2F;caddy&#x2F;releases 或 https:&#x2F;&#x2F;caddyse">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用caddy本地反代giyhub">
+<meta property="og:url" content="https://blog.crisipa.icu/2023/10/08/%E7%94%A8caddy%E6%9C%AC%E5%9C%B0%E5%8F%8D%E4%BB%A3giyhub/">
+<meta property="og:site_name" content="crisypa 的小本子">
+<meta property="og:description" content="前言github的网络问题已经是老生常谈的了。 准备工具下载caddycaddy 是一个开源的跨平台服务器软件，旨在提供简单易用的配置和自动化的 HTTPS 功能。比起nginx，caddy的配置文件相当简洁 官网：https:&#x2F;&#x2F;caddyserver.com&#x2F;下载链接：https:&#x2F;&#x2F;github.com&#x2F;caddyserver&#x2F;caddy&#x2F;releases 或 https:&#x2F;&#x2F;caddyse">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-10-08T02:54:32.000Z">
+<meta property="article:modified_time" content="2023-10-08T09:25:36.727Z">
+<meta property="article:author" content="crisypa">
+<meta property="article:tag" content="&#x2F;images&#x2F;caddy_reverse_github.png">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" href="/atom.xml" title="crisypa 的小本子" type="application/atom+xml">
+    
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+    
+        
+<link rel="stylesheet" href="https://unpkg.com/typeface-source-code-pro@1.1.13/index.css">
+
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+    
+    
+    
+    
+    
+<script src="https://unpkg.com/pace-js@1.2.4/pace.min.js"></script>
+
+    
+        
+<link rel="stylesheet" href="https://unpkg.com/wowjs@1.1.3/css/libs/animate.css">
+
+        
+<script src="https://unpkg.com/wowjs@1.1.3/dist/wow.min.js"></script>
+
+        <script>
+          new WOW({
+            offset: 0,
+            mobile: true,
+            live: false
+          }).init();
+        </script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+    <body>
+    
+<div id='loader'>
+  <div class="loading-left-bg"></div>
+  <div class="loading-right-bg"></div>
+  <div class="spinner-box">
+    <div class="loading-taichi">
+      <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+      <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="#ff6e6b" />
+      <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z" fill="#fd0d00" />
+      <path d="M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95" fill="#fd0d00" />
+    </svg>
+    </div>
+    <div class="loading-word">少女祈祷中...</div>
+  </div>
+</div>
+</div>
+
+<script>
+  const endLoading = function() {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loader').classList.add("loading");
+  }
+  window.addEventListener('load', endLoading);
+  document.getElementById('loader').addEventListener('click', endLoading);
+</script>
+
+
+    <div id="container">
+        <div id="wrap">
+            <header id="header">
+    
+        <img data-src="/images/banner.jpg" data-sizes="auto" alt="用caddy本地反代giyhub" class="lazyload">
+    
+    <div id="header-outer" class="outer">
+        <div id="header-title" class="inner">
+            <div id="logo-wrap">
+                
+                    
+                    
+                        <a href="/" id="logo"><h1>用caddy本地反代giyhub</h1></a>
+                    
+                
+            </div>
+            
+                
+                
+            
+        </div>
+        <div id="header-inner">
+            <nav id="main-nav">
+                <a id="main-nav-toggle" class="nav-icon"></a>
+                
+                    <span class="main-nav-link-wrap">
+                        <span class="main-nav-icon"></span>
+                        <a class="main-nav-link" href="/">首页</a>
+                    </span>
+                
+                    <span class="main-nav-link-wrap">
+                        <span class="main-nav-icon"></span>
+                        <a class="main-nav-link" href="/archives">归档</a>
+                    </span>
+                
+                    <span class="main-nav-link-wrap">
+                        <span class="main-nav-icon"></span>
+                        <a class="main-nav-link" href="/about">关于</a>
+                    </span>
+                
+                    <span class="main-nav-link-wrap">
+                        <span class="main-nav-icon"></span>
+                        <a class="main-nav-link" href="/friend">友链</a>
+                    </span>
+                
+            </nav>
+            <nav id="sub-nav">
+                
+                    <a id="nav-rss-link" class="nav-icon" href="/atom.xml"
+                       title="RSS 订阅"></a>
+                
+                
+            </nav>
+            <div id="search-form-wrap">
+                <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.crisipa.icu"></form>
+            </div>
+        </div>
+    </div>
+</header>
+
+            <div id="content" class="outer">
+                <section id="main"><article id="post-用caddy本地反代giyhub" class="h-entry article article-type-post"
+         itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <div class="article-inner">
+        <div class="article-meta">
+            <div class="article-date wow slideInLeft">
+    <a href="/2023/10/08/%E7%94%A8caddy%E6%9C%AC%E5%9C%B0%E5%8F%8D%E4%BB%A3giyhub/" class="article-date-link">
+        <time datetime="2023-10-08T02:54:32.000Z"
+              itemprop="datePublished">2023-10-08</time>
+    </a>
+</div>
+
+            
+
+        </div>
+        <div class="hr-line"></div>
+        
+
+        <div class="e-content article-entry" itemprop="articleBody">
+            
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>github的网络问题已经是老生常谈的了。</p>
+<h2 id="准备工具"><a href="#准备工具" class="headerlink" title="准备工具"></a>准备工具</h2><h3 id="下载caddy"><a href="#下载caddy" class="headerlink" title="下载caddy"></a>下载caddy</h3><p>caddy 是一个开源的跨平台服务器软件，旨在提供简单易用的配置和自动化的 HTTPS 功能。比起nginx，caddy的配置文件相当简洁</p>
+<p>官网：<a target="_blank" rel="noopener" href="https://caddyserver.com/">https://caddyserver.com/</a><br>下载链接：<a target="_blank" rel="noopener" href="https://github.com/caddyserver/caddy/releases">https://github.com/caddyserver/caddy/releases</a> 或 <a target="_blank" rel="noopener" href="https://caddyserver.com/download">https://caddyserver.com/download</a><br>文档：<a target="_blank" rel="noopener" href="https://caddyserver.com/docs/">https://caddyserver.com/docs/</a></p>
+<p>随便找个文件夹把它放进去</p>
+<h3 id="安装openssl"><a href="#安装openssl" class="headerlink" title="安装openssl"></a>安装openssl</h3><p>先安装 openssl ,windows用户从这里下载：<a target="_blank" rel="noopener" href="https://slproweb.com/products/Win32OpenSSL.html">https://slproweb.com/products/Win32OpenSSL.html</a></p>
+<p>安装后记得配置下环境变量（Windows用户专属）：把openssl安装目录下的bin文件夹的路径加进path变量里</p>
+<h2 id="制作原料"><a href="#制作原料" class="headerlink" title="制作原料"></a>制作原料</h2><h3 id="签个根证书"><a href="#签个根证书" class="headerlink" title="签个根证书"></a>签个根证书</h3><p>参考资料： <a target="_blank" rel="noopener" href="https://2heng.xin/2018/12/16/your-own-ca-with-openssl/">https://2heng.xin/2018/12/16/your-own-ca-with-openssl/</a></p>
+<h4 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h4><p>在你放caddy的文件夹里，新建一个txt文件 index.txt<br>然后在此目录里打开终端输入命令</p>
+<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sas">openssl genrsa -<span class="hljs-keyword">out</span> github.com.<span class="hljs-keyword">key</span> 2048<br>openssl genrsa -<span class="hljs-keyword">out</span> rootCA.<span class="hljs-keyword">key</span> 2048<br></code></pre></td></tr></table></figure>
+
+<h4 id="制作CA证书"><a href="#制作CA证书" class="headerlink" title="制作CA证书"></a>制作CA证书</h4><p>在你放caddy的文件夹里，新建一个txt文件 config_rootCA.txt 并写入以下内容</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[ req ]</span><br><span class="hljs-attr">default_bits</span>			= <span class="hljs-number">2048</span><br><br><span class="hljs-attr">prompt</span>				    = <span class="hljs-literal">no</span><br><span class="hljs-attr">distinguished_name</span>		= req_distinguished_name<br><span class="hljs-attr">v3_extensions</span>			= v3_ext<br><br><span class="hljs-section">[ req_distinguished_name ]</span><br><span class="hljs-attr">countryName</span>			    = CN<br><span class="hljs-attr">organizationName</span>		= GFW Foundation<br><span class="hljs-attr">commonName</span>			    = Local Fake CA<br><br><span class="hljs-section">[ v3_ext ]</span><br><span class="hljs-attr">keyUsage</span>			    = keyCertSign,cRLSign<br><span class="hljs-attr">basicConstraints</span>		= CA:<span class="hljs-literal">true</span><br><span class="hljs-attr">subjectKeyIdentifier</span>		= hash<br><span class="hljs-attr">authorityKeyIdentifier</span>		= keyid,issuer<br></code></pre></td></tr></table></figure>
+<p>然后在之前的终端里输入命令</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs maxima">openssl req -<span class="hljs-built_in">new</span> -x509 -<span class="hljs-built_in">key</span> rootCA.<span class="hljs-built_in">key</span> -out rootCA.crt -days <span class="hljs-number">3650</span> -config config_rootCA.txt<br></code></pre></td></tr></table></figure>
+
+<h4 id="用这个CA证书签SSL证书"><a href="#用这个CA证书签SSL证书" class="headerlink" title="用这个CA证书签SSL证书"></a>用这个CA证书签SSL证书</h4><p>在你放caddy的文件夹里，再新建一个txt文件 config_childCA.txt 并写入以下内容</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[ req ]</span><br><span class="hljs-attr">default_bits</span>				= <span class="hljs-number">2048</span><br><br><span class="hljs-attr">prompt</span>					    = <span class="hljs-literal">no</span><br><span class="hljs-attr">distinguished_name</span>			= req_distinguished_name<br><span class="hljs-attr">req_extensions</span>				= v3_req<br><br><span class="hljs-section">[ req_distinguished_name ]</span><br><span class="hljs-attr">countryName</span>				    = CN<br><span class="hljs-attr">organizationName</span>			= GFW Foundation<br><span class="hljs-attr">commonName</span>				    = LocalFakeCA<br><br><span class="hljs-section">[ alternate_names ]</span><br><span class="hljs-attr">DNS.01</span> = github.com<br><span class="hljs-attr">DNS.02</span> = *.github.com<br><span class="hljs-attr">DNS.03</span> = githubusercontent.com<br><span class="hljs-attr">DNS.04</span> = *.githubusercontent.com<br><br><span class="hljs-section">[ v3_req ]</span><br><span class="hljs-attr">keyUsage</span>				    = digitalSignature<br><span class="hljs-attr">extendedKeyUsage</span>			= serverAuth,clientAuth<br><span class="hljs-attr">basicConstraints</span>			= CA:<span class="hljs-literal">false</span><br><span class="hljs-attr">subjectAltName</span>				= @alternate_names<br><span class="hljs-attr">subjectKeyIdentifier</span>	    = hash<br></code></pre></td></tr></table></figure>
+<p>在你放caddy的文件夹里，再新建一个txt文件 config_signCA.txt 并写入以下内容</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[ ca ]</span><br><span class="hljs-attr">default_ca</span>		= myca<br><br><span class="hljs-section">[ myca ]</span><br><span class="hljs-attr">serial</span>			    = ./crtserial.srl<br><span class="hljs-attr">database</span>		    = ./index.txt<br><span class="hljs-attr">new_certs_dir</span>		= ./<br><span class="hljs-attr">certificate</span>		    = ./rootCA.crt<br><span class="hljs-attr">private_key</span>		    = ./rootCA.key<br><span class="hljs-attr">default_md</span>		    = sha256<br><span class="hljs-attr">default_days</span>		= <span class="hljs-number">3650</span><br><span class="hljs-attr">unique_subject</span>		= <span class="hljs-literal">no</span><br><span class="hljs-attr">policy</span>			    = my_policy<br><span class="hljs-attr">copy_extensions</span>		= copy<br><br><br><span class="hljs-section">[ my_policy ]</span><br><span class="hljs-attr">countryName</span>		    = optional<br><span class="hljs-attr">stateOrProvinceName</span>	= optional<br><span class="hljs-attr">localityName</span>		= optional<br><span class="hljs-attr">organizationName</span>	= optional<br><span class="hljs-attr">organizationalUnitName</span>	= optional<br><span class="hljs-attr">commonName</span>		    = supplied<br><span class="hljs-attr">emailAddress</span>		= optional<br></code></pre></td></tr></table></figure>
+<p>然后在之前的终端里输入命令</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus">echo <span class="hljs-number">01</span> &gt; crtserial<span class="hljs-selector-class">.srl</span><br>openssl req -new -sha256 -key github<span class="hljs-selector-class">.com</span><span class="hljs-selector-class">.key</span> -out github<span class="hljs-selector-class">.com</span><span class="hljs-selector-class">.csr</span> -config config_childCA<span class="hljs-selector-class">.txt</span><br>openssl ca -config config_signCA<span class="hljs-selector-class">.txt</span> -<span class="hljs-keyword">in</span> github<span class="hljs-selector-class">.com</span><span class="hljs-selector-class">.csr</span> -out github<span class="hljs-selector-class">.com</span>.crt<br></code></pre></td></tr></table></figure>
+<h3 id="制作-Caddyfile"><a href="#制作-Caddyfile" class="headerlink" title="制作 Caddyfile"></a>制作 Caddyfile</h3><p>在你放caddy的文件夹里，新建一个txt文件 <a href="">Caddyfile</a> (没有后缀名) </p>
+<p>先塞全局配置<br>其中最重要的就是 auto_https disable_certs 。若是省去，caddy会自动帮你申请证书。但是我们是要在本地进行反向代理，申请不了证书的。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs nginx">&#123;<br>	<span class="hljs-comment"># General Options</span><br>	<span class="hljs-attribute">http_port</span>    <span class="hljs-number">80</span><br>	https_port   <span class="hljs-number">443</span><br><span class="hljs-comment">#	default_bind &lt;host&gt;</span><br><br>	<span class="hljs-comment"># TLS Options</span><br>    auto_https disable_certs<br>    admin <span class="hljs-literal">off</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>然后是对 github.com 的配置 </p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs dns">github.com &#123;<br>    tls .\github.com.crt .\github.com.key<br>    reverse_proxy &#123;<br>        to <span class="hljs-number">140.82.112.3</span>:<span class="hljs-number">443 140.82</span>.<span class="hljs-number">112.4:443</span> <span class="hljs-number">140.82.113.3</span>:<span class="hljs-number">443 140.82</span>.<span class="hljs-number">113.4:443</span><br>        lb_policy random<br>        fail_duration <span class="hljs-number">60</span>s  #失败时间<br>        max_fails <span class="hljs-number">60</span>       #失败计数<br>        unhealthy_status <span class="hljs-number">502 500</span> <span class="hljs-number">503 403</span><br>        flush_interval -<span class="hljs-number">1</span><br>        header_up Host &#123;http.request.host&#125;<br>        transport http &#123;<br>			tls<br>			tls_insecure_skip_verify<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>还有 raw 头像 静态资源 这些</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs dns">githubusercontent.com *.githubusercontent.com raw.github.com &#123;<br>    tls .\github.com.crt .\github.com.key<br>    reverse_proxy &#123;<br>        to <span class="hljs-number">151.101.88.133</span>:<span class="hljs-number">443 151.101</span>.<span class="hljs-number">196.133:443</span> <span class="hljs-number">151.101.40.133</span>:<span class="hljs-number">443 151.164</span>.<span class="hljs-number">133:443 151</span>.<span class="hljs-number">101.24.133</span>:<span class="hljs-number">443 151.101</span>.<span class="hljs-number">128.133:443</span> <span class="hljs-number">151.101.192.133</span>:<span class="hljs-number">443 151.101</span>.<span class="hljs-number">120.133:443</span> <span class="hljs-number">151.101.64.133</span>:<span class="hljs-number">443</span><br>        lb_policy random<br>        fail_duration <span class="hljs-number">60</span>s  #失败时间<br>        max_fails <span class="hljs-number">60</span>       #失败计数<br>        unhealthy_status <span class="hljs-number">502 500</span> <span class="hljs-number">503 403</span><br>        flush_interval -<span class="hljs-number">1</span><br>        header_up Host &#123;http.request.host&#125;<br>        transport http &#123;<br>			tls<br>			tls_insecure_skip_verify<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>最后是似乎没多大用的gist</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs dns">gist.github.com &#123;<br>    tls .\github.com.crt .\github.com.key<br>    reverse_proxy &#123;<br>        to <span class="hljs-number">20.207.73.82</span>:<span class="hljs-number">443 140.82</span>.<span class="hljs-number">113.3:443</span> <span class="hljs-number">140.82.121.4</span>:<span class="hljs-number">443 140.82</span>.<span class="hljs-number">121.3:443</span><br>        lb_policy random<br>        fail_duration <span class="hljs-number">60</span>s  #失败时间<br>        max_fails <span class="hljs-number">60</span>       #失败计数<br>        unhealthy_status <span class="hljs-number">502 500</span> <span class="hljs-number">503 403</span><br>        flush_interval -<span class="hljs-number">1</span><br>        header_up Host &#123;http.request.host&#125;<br>        transport http &#123;<br>			tls<br>			tls_insecure_skip_verify<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>你还可以用这方式上steam :)</p>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>直接在你放caddy的文件夹里开一个终端运行条命令就启动caddy了</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">./caddy <span class="hljs-built_in">run</span><br></code></pre></td></tr></table></figure>
+<p>然后修改hosts文件，加入这些：</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs accesslog">## github<br><span class="hljs-number">127.0.0.1</span> github.com<br><span class="hljs-number">127.0.0.1</span> raw.githubusercontent.com<br><span class="hljs-number">127.0.0.1</span> cloud.githubusercontent.com<br><span class="hljs-number">127.0.0.1</span> camo.githubusercontent.com<br><span class="hljs-number">127.0.0.1</span> user-images.githubusercontent.com<br><span class="hljs-number">127.0.0.1</span> avatars3.githubusercontent.com<br><span class="hljs-number">127.0.0.1</span> avatars2.githubusercontent.com<br><span class="hljs-number">127.0.0.1</span> avatars1.githubusercontent.com<br><span class="hljs-number">127.0.0.1</span> avatars0.githubusercontent.com<br><span class="hljs-number">127.0.0.1</span> avatars.githubusercontent.com<br><span class="hljs-number">127.0.0.1</span> raw.github.com<br><span class="hljs-number">127.0.0.1</span> githubusercontent.com<br><span class="hljs-number">127.0.0.1</span> gist.github.com<br></code></pre></td></tr></table></figure>
+<p>别忘了关闭git的ssl验证：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">git config <span class="hljs-attr">--global</span> http<span class="hljs-selector-class">.sslverify</span> <span class="hljs-string">&quot;false&quot;</span><br></code></pre></td></tr></table></figure>
+<p>好了，github的使用体验应该已经得到了改善</p>
+<h2 id="一些问题"><a href="#一些问题" class="headerlink" title="一些问题"></a>一些问题</h2><h3 id="1-ssh用不了"><a href="#1-ssh用不了" class="headerlink" title="1.ssh用不了"></a>1.ssh用不了</h3><p>个人技术有限，而且也不是必须用ssh： <a target="_blank" rel="noopener" href="https://docs.github.com/zh/get-started/getting-started-with-git/caching-your-github-credentials-in-git">https://docs.github.com/zh/get-started/getting-started-with-git/caching-your-github-credentials-in-git</a></p>
+<h3 id="2-白屏或502"><a href="#2-白屏或502" class="headerlink" title="2.白屏或502"></a>2.白屏或502</h3><p>多试几次就行了</p>
+
+            
+        </div>
+        <footer class="article-footer">
+            <a data-url="https://blog.crisipa.icu/2023/10/08/%E7%94%A8caddy%E6%9C%AC%E5%9C%B0%E5%8F%8D%E4%BB%A3giyhub/" data-id="clnh971u10000qcsvcuwl5mv6" data-title="用caddy本地反代giyhub"
+               class="article-share-link">分享</a>
+            
+            
+            
+            
+    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/images-caddy-reverse-github-png/" rel="tag">&#x2F;images&#x2F;caddy_reverse_github.png</a></li></ul>
+
+
+        </footer>
+    </div>
+    
+        
+    <nav id="article-nav" class="wow fadeInUp">
+        
+        
+            <div class="article-nav-link-wrap article-nav-link-right">
+                
+                    <img data-src="/images/hello-world.cover.png" data-sizes="auto" alt="Hello World!"
+                         class="lazyload">
+                
+                <a href="/2023/09/29/hello-world/"></a>
+                <div class="article-nav-caption">后一篇</div>
+                <h3 class="article-nav-title">
+                    
+                        Hello World!
+                    
+                </h3>
+            </div>
+        
+    </nav>
+
+
+    
+</article>
+
+
+
+
+
+
+
+
+
+
+
+</section>
+                
+                    <aside id="sidebar">
+    <div class="sidebar-wrap wow fadeInRight">
+        <div class="sidebar-author">
+            <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="crisypa" class="lazyload">
+            <div class="sidebar-author-name">crisypa</div>
+            <div class="sidebar-description"></div>
+        </div>
+        <div class="sidebar-state">
+            <div class="sidebar-state-article">
+                <div>文章</div>
+                <div class="sidebar-state-number">2</div>
+            </div>
+            <div class="sidebar-state-category">
+                <div>分类</div>
+                <div class="sidebar-state-number">0</div>
+            </div>
+            <div class="sidebar-state-tag">
+                <div>标签</div>
+                <div class="sidebar-state-number">1</div>
+            </div>
+        </div>
+        <div class="sidebar-social">
+            
+                <div class=icon-github>
+                    <a href=https://github.com/Crisypa itemprop="url" target="_blank"></a>
+                </div>
+            
+                <div class=icon-google>
+                    <a href= itemprop="url" target="_blank"></a>
+                </div>
+            
+                <div class=icon-twitter>
+                    <a href= itemprop="url" target="_blank"></a>
+                </div>
+            
+                <div class=icon-facebook>
+                    <a href= itemprop="url" target="_blank"></a>
+                </div>
+            
+        </div>
+        <div class="sidebar-menu">
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">首页</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/archives"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">归档</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/about"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">关于</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/friend"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">友链</div>
+                </div>
+            
+        </div>
+    </div>
+    
+        
+
+    
+        
+    <div class="widget-wrap wow fadeInRight">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/images-caddy-reverse-github-png/" style="font-size: 10px;">/images/caddy_reverse_github.png</a>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="widget-wrap wow fadeInRight">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a></li></ul>
+        </div>
+    </div>
+
+
+    
+</aside>
+
+                
+            </div>
+            <footer id="footer" class="wow fadeInUp">
+    <div style="width: 100%; overflow: hidden"><div class="footer-line"></div></div>
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            
+            <div>
+                <span class="icon-copyright"></span>
+                2020-2023
+                <span class="footer-info-sep"></span>
+                crisypa
+            </div>
+            
+                <div>
+                    基于&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>&nbsp;
+                    Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" target="_blank">Reimu</a>
+                </div>
+            
+            
+                <div>
+                    <span class="icon-brush"></span>
+                    1.1k
+                    &nbsp;|&nbsp;
+                    <span class="icon-coffee"></span>
+                    00:06
+                </div>
+            
+            
+                <div>
+                    <span class="icon-eye"></span>
+                    <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+                    &nbsp;|&nbsp;
+                    <span class="icon-user"></span>
+                    <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+                </div>
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+        <nav id="mobile-nav">
+    <div class="sidebar-wrap">
+        <div class="sidebar-author">
+            <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="crisypa" class="lazyload">
+            <div class="sidebar-author-name">crisypa</div>
+            <div class="sidebar-description"></div>
+        </div>
+        <div class="sidebar-state">
+            <div class="sidebar-state-article">
+                <div>文章</div>
+                <div class="sidebar-state-number">2</div>
+            </div>
+            <div class="sidebar-state-category">
+                <div>分类</div>
+                <div class="sidebar-state-number">0</div>
+            </div>
+            <div class="sidebar-state-tag">
+                <div>标签</div>
+                <div class="sidebar-state-number">1</div>
+            </div>
+        </div>
+        <div class="sidebar-social">
+            
+                <div class=icon-github>
+                    <a href=https://github.com/Crisypa itemprop="url" target="_blank"></a>
+                </div>
+            
+                <div class=icon-google>
+                    <a href= itemprop="url" target="_blank"></a>
+                </div>
+            
+                <div class=icon-twitter>
+                    <a href= itemprop="url" target="_blank"></a>
+                </div>
+            
+                <div class=icon-facebook>
+                    <a href= itemprop="url" target="_blank"></a>
+                </div>
+            
+        </div>
+        <div class="sidebar-menu">
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">首页</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/archives"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">归档</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/about"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">关于</div>
+                </div>
+            
+                <div class="sidebar-menu-link-wrap">
+                    <a class="sidebar-menu-link-dummy" href="/friend"></a>
+                    <span class="sidebar-menu-icon"></span>
+                    <div class="sidebar-menu-link">友链</div>
+                </div>
+            
+        </div>
+    </div>
+</nav>
+
+        
+<script src="https://unpkg.com/jquery@3.7.0/dist/jquery.min.js"></script>
+
+
+<script src="https://unpkg.com/lazysizes@5.3.2/lazysizes.min.js"></script>
+
+
+<script src="https://unpkg.com/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+
+
+    
+<script src="https://unpkg.com/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+
+
+    
+<script src="https://unpkg.com/busuanzi@2.3.0/bsz.pure.mini.js"></script>
+
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+    <div class="site-search">
+        <div class="algolia-popup popup">
+            <div class="algolia-search">
+                <span class="algolia-search-input-icon"></span>
+                <div class="algolia-search-input" id="algolia-search-input"></div>
+            </div>
+
+            <div class="algolia-results">
+                <div id="algolia-stats"></div>
+                <div id="algolia-hits"></div>
+                <div id="algolia-pagination" class="algolia-pagination"></div>
+            </div>
+
+            <span class="popup-btn-close"></span>
+        </div>
+    </div>
+    <!-- hexo injector body_end start -->
+<script src="/js/insertHighlight.js"></script>
+<!-- hexo injector body_end end --></body>
+    </html>
+
