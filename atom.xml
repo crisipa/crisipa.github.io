@@ -6,7 +6,7 @@
   <link href="https://blog.crisipa.icu/atom.xml" rel="self"/>
   
   <link href="https://blog.crisipa.icu/"/>
-  <updated>2023-09-29T11:13:06.875Z</updated>
+  <updated>2023-10-08T02:37:18.461Z</updated>
   <id>https://blog.crisipa.icu/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://blog.crisipa.icu/2023/09/29/hello-world/"/>
     <id>https://blog.crisipa.icu/2023/09/29/hello-world/</id>
     <published>2023-09-29T05:53:33.825Z</published>
-    <updated>2023-09-29T11:13:06.875Z</updated>
+    <updated>2023-10-08T02:37:18.461Z</updated>
     
     <content type="html"><![CDATA[<p>用 hexo 造的博客。<br>使用了 <a href="https://github.com/D-Sketon">D-Sketon</a> 大佬的 <a href="https://github.com/D-Sketon/hexo-theme-reimu" title="一款博丽灵梦风格的Hexo主题">hexo-theme-reimu</a> 主题。</p>]]></content>
     
