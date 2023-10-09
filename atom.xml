@@ -3,11 +3,11 @@
   <title>crisypa 的小本子</title>
   
   <subtitle>null</subtitle>
-  <link href="https://blog.crisipa.icu/atom.xml" rel="self"/>
+  <link href="https://crisypa.github.io/atom.xml" rel="self"/>
   
-  <link href="https://blog.crisipa.icu/"/>
+  <link href="https://crisypa.github.io/"/>
   <updated>2023-10-08T14:40:30.932Z</updated>
-  <id>https://blog.crisipa.icu/</id>
+  <id>https://crisypa.github.io/</id>
   
   <author>
     <name>crisypa</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>用caddy本地反代github</title>
-    <link href="https://blog.crisipa.icu/2023/10/08/%E7%94%A8caddy%E6%9C%AC%E5%9C%B0%E5%8F%8D%E4%BB%A3giyhub/"/>
-    <id>https://blog.crisipa.icu/2023/10/08/%E7%94%A8caddy%E6%9C%AC%E5%9C%B0%E5%8F%8D%E4%BB%A3giyhub/</id>
+    <link href="https://crisypa.github.io/2023/10/08/%E7%94%A8caddy%E6%9C%AC%E5%9C%B0%E5%8F%8D%E4%BB%A3giyhub/"/>
+    <id>https://crisypa.github.io/2023/10/08/%E7%94%A8caddy%E6%9C%AC%E5%9C%B0%E5%8F%8D%E4%BB%A3giyhub/</id>
     <published>2023-10-08T02:54:32.000Z</published>
     <updated>2023-10-08T14:40:30.932Z</updated>
     
@@ -37,21 +37,21 @@
     
     
     
-    <category term="计算机技术" scheme="https://blog.crisipa.icu/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%8A%80%E6%9C%AF/"/>
+    <category term="计算机技术" scheme="https://crisypa.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%8A%80%E6%9C%AF/"/>
     
     
-    <category term="caddy" scheme="https://blog.crisipa.icu/tags/caddy/"/>
+    <category term="caddy" scheme="https://crisypa.github.io/tags/caddy/"/>
     
-    <category term="反向代理" scheme="https://blog.crisipa.icu/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/"/>
+    <category term="反向代理" scheme="https://crisypa.github.io/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/"/>
     
-    <category term="github" scheme="https://blog.crisipa.icu/tags/github/"/>
+    <category term="github" scheme="https://crisypa.github.io/tags/github/"/>
     
   </entry>
   
   <entry>
     <title>Hello World!</title>
-    <link href="https://blog.crisipa.icu/2023/09/29/hello-world/"/>
-    <id>https://blog.crisipa.icu/2023/09/29/hello-world/</id>
+    <link href="https://crisypa.github.io/2023/09/29/hello-world/"/>
+    <id>https://crisypa.github.io/2023/09/29/hello-world/</id>
     <published>2023-09-29T05:53:33.825Z</published>
     <updated>2023-10-08T02:37:18.461Z</updated>
     
