@@ -221,6 +221,26 @@
             
             
             
+                <a href="/friend/#comments" class="article-comment-link">
+                    <span class="post-comments-count twikoo-comment-count" data-path="/friend/"
+                          itemprop="commentCount"></span>
+                    留言
+                </a>
+                <script>
+                    twikoo.getCommentsCount({
+                          envId: 'https://blog.crisipa.icu/twikoo/',
+                          region: '',
+                          urls: [
+                            '/friend/'
+                          ],
+                          includeReply: false
+                      }).then(function (res) {
+                          document.querySelector('.twikoo-comment-count').innerText = res[0].count;
+                      }).catch(function (err) {
+                          console.error(err);
+                      });
+                </script>
+            
             
 
         </footer>
@@ -235,6 +255,8 @@
 
 
 
+
+     <div id="comments" class="tcomment"></div>
 
 
 
@@ -257,7 +279,7 @@
             </div>
             <div class="sidebar-state-category">
                 <div>分类</div>
-                <div class="sidebar-state-number">0</div>
+                <div class="sidebar-state-number">1</div>
             </div>
             <div class="sidebar-state-tag">
                 <div>标签</div>
@@ -313,6 +335,13 @@
     </div>
     
         
+    <div class="widget-wrap wow fadeInRight">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%8A%80%E6%9C%AF/">计算机技术</a></li></ul>
+        </div>
+    </div>
+
 
     
         
@@ -393,7 +422,7 @@
             </div>
             <div class="sidebar-state-category">
                 <div>分类</div>
-                <div class="sidebar-state-number">0</div>
+                <div class="sidebar-state-number">1</div>
             </div>
             <div class="sidebar-state-tag">
                 <div>标签</div>
@@ -484,6 +513,17 @@
 
 
 
+
+    
+<script src="https://unpkg.com/twikoo@1.6.16/dist/twikoo.all.min.js"></script>
+
+    <script>
+        twikoo.init({
+            envId: 'https://blog.crisipa.icu/twikoo/',
+            el: '.tcomment',
+            region: '',
+        })
+    </script>
 
 
 
