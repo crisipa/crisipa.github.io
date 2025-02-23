@@ -1,14 +1,14 @@
 site:
-  url: https://example.com # same as `site` in astro.config.mjs
-  title: My Blog
-  subtitle: My Blog Subtitle
-  description: D-Sketon's blog
-  keywords: D-Sketon, blog, astro, theme
-  author: D-Sketon
+  url: https://crisipa.github.io # same as `site` in astro.config.mjs
+  title: A Blog
+  subtitle: 'null'
+  description: crisipa's blog
+  keywords: crisipa, blog
+  author: crisipa
   language: zh-CN
 
 footer:
-  since: 2020 # 2020 - current year
+  since: 2023 # 2020 - current year
   powered: true
   count: true
   busuanzi: true
@@ -20,10 +20,10 @@ analytics:
 
 social:
   # email: mailto:xxx@gmail.com
-  github: https://github.com/yourname
-  google: https://plus.google.com/yourname
-  twitter: https://twitter.com/yourname
-  facebook: https://www.facebook.com/yourname
+  github: https://github.com/crisipa
+  # google: https://plus.google.com/yourname
+  # twitter: https://twitter.com/yourname
+  # facebook: https://www.facebook.com/yourname
   # instagram: https://www.instagram.com/yourname
   # linkedin: https://www.linkedin.com/in/yourname
   # pinterest: https://www.pinterest.com/yourname
@@ -95,7 +95,7 @@ gitalk:
 friend:
   - name: D-Sketon
     url: https://d-sketon.github.io/
-    desc: Main Site with hexo-theme-reimu
+    desc: 网站主题作者
     avatar: https://d-sketon.github.io/avatar/avatar.webp
 
 copyright:
