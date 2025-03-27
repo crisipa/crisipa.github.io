@@ -97,6 +97,10 @@ friend:
     url: https://d-sketon.github.io/
     desc: 网站主题作者
     avatar: https://d-sketon.github.io/avatar/avatar.webp
+  - name: Neokoni's Blog
+    url: https://blog.neokoni.ink
+    desc: Follow that star
+    avatar: https://avatars.githubusercontent.com/u/90206655
 
 copyright:
   enable: true
